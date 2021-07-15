@@ -1,0 +1,38 @@
+name: "github-actions-eks-helm"
+description: "Github Action to work with helm charts & AWS EKS."
+author: "podcast.co development"
+branding:
+  icon: "terminal"
+  color: "black"
+inputs:
+  command:
+    description: "The command(s) to run."
+    required: true
+  eksClusterName:
+    description: "Name of the EKS cluster operate on."
+    required: true
+  awsAccessKeyId:
+    description: "Your AWS access key id to get the cluster context."
+    required: true
+  awsSecretAccessKey:
+    description: "Your AWS Secret access key to get the cluster context."
+    required: true
+  awsDefaultRegion:
+    description: "Your AWS region to get the cluster context."
+    required: false
+    default: "us-east-1"
+  helmChart:
+    description: "The helm chart name."
+    required: true
+  helmEnvironment:
+    description: "The environment we deploying to."
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.command }}
+    - ${{ inputs.eksClusterName }}
+    - ${{ inputs.awsAccessKeyId }}
+    - ${{ inputs.awsSecretAccessKey }}
+    - ${{ inputs.awsDefaultRegion }}
