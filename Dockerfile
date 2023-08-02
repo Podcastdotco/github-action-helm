@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:3
 
 ENV KUBE_VERSION=1.19.3
 ENV KUBE_URL=https://storage.googleapis.com/kubernetes-release/release/v$KUBE_VERSION/bin/linux/amd64/kubectl
@@ -8,7 +8,7 @@ ENV HELM_URL=https://get.helm.sh/helm-v$HELM_VERSION-linux-amd64.tar.gz
 
 ENV IAM_URL=https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/aws-iam-authenticator
 
-RUN apk add --update --no-cache git openssh curl python py-pip
+RUN apk add --update --no-cache git openssh curl python3 py-pip
 
 RUN curl -LO $KUBE_URL && \
     mv ./kubectl /usr/local/bin/kubectl && \
