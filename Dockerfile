@@ -19,6 +19,10 @@ RUN curl -L $HELM_URL | tar xvz && \
     chmod +x /usr/local/bin/helm && \
     rm -rf linux-amd64
 
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
 RUN pip install awscli
 
 RUN curl -o aws-iam-authenticator $IAM_URL && \
